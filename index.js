@@ -18,23 +18,27 @@
 // if key is NOT in object, set key and set valve of key to 1
 // if key IS in object, then increase value by 1
 
-function processFroyoOrder() {
-  const userInput = prompt("Enter a comma-separated list of froyo flavors:");
-  if (userInput === null) {
-    return;
-  }
-
-  const flavors = userInput.split(",");
+function countFlavors(flavorArray) {
   const flavorCounts = {};
 
-  for (const flavor of flavors) {
-    const trimmedFlavor = flavor.trim();
-    if (trimmedFlavor) {
-      flavorCounts[trimmedFlavor] = (flavorCounts[trimmedFlavor] || 0) + 1;
-    }
-  }
+  flavorArray.forEach((flavor) => {
+    flavorCounts[flavor] = (flavorCounts[flavor] || 0) + 1;
+  });
 
-  console.log(flavorCounts);
+  return flavorCounts;
 }
 
-processFroyoOrder();
+const flavorInput = prompt(
+  "Please enter your froyo flavors, separated by commas:"
+);
+
+if (flavorInput) {
+  const flavors = flavorInput.split(",");
+
+  const flavorCounts = countFlavors(flavors);
+
+  console.log("Your froyo order:");
+  console.log(flavorCounts);
+} else {
+  console.log("No flavors entered.");
+}
